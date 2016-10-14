@@ -1,0 +1,43 @@
+/*  convertall.css, the main CSS file
+
+/*  ConvertAll, a versatile unit converter  */
+/*  Copyright (C) 2016, Douglas W. Bell  */
+
+/*  This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License, either
+    version 3 of the License, or any later version.  This program is
+    distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
+    See <http://www.gnu.org/licenses/> for details.  */
+
+body {
+    background-color: #1f2e25;
+    color: #ffffcf;
+}
+
+a {
+    color: #8ff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.flex-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.flex-item {
+    width: 250px;
+    padding: 10px 20px 5px;
+}
+
+input {
+    width: 100%;
+    margin: 5px 0px;
+}
+
+#statusline {
+    padding: 0px 20px;
+}

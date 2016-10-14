@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<!-- ConvertAll, a versatile unit converter -->
+<!-- Copyright (C) 2016, Douglas W. Bell -->
+
+<!-- This program is free software: you can redistribute it and/or modify
+     it under the terms of the GNU Affero General Public License, either
+     version 3 of the License, or any later version.  This program is
+     distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
+     See <http://www.gnu.org/licenses/> for details. -->
+
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="convertall.css" />
+    <link rel="icon" href="favicon.png" />
+
+    <title>ConvertAll</title>
+</head>
+
+<body>
+    <form id="mainform" action="">
+        <div class="flex-container">
+            <div class="flex-item">
+                <label for="fromeditor">From Unit:</label><br />
+                <input type="text" id="fromeditor" tabindex="1" autofocus />
+                <br />
+                <span id="fromoutput"></span><br />
+                <input type="text" id="fromnum" tabindex="3"/>
+            </div>
+            <div class="flex-item">
+                <label for="toeditor">To Unit:</label><br />
+                <input type="text" id="toeditor" tabindex="2"/><br />
+                <span id="tooutput"></span><br />
+                <input type="text" id="tonum" tabindex="4"/>
+            </div>
+        </div>
+        <div id="statusline"></div>
+    </form>
+
+    <script src="units.js"></script>
+    <script src="convertall.js"></script>
+
+</body>
+
+</html>
