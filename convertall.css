@@ -1,43 +1,302 @@
-/*  convertall.css, the main CSS file
+/*  convertall.css, the main CSS file  */
 
 /*  ConvertAll, a versatile unit converter  */
 /*  Copyright (C) 2016, Douglas W. Bell  */
 
 /*  This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU Affero General Public License, either
-    version 3 of the License, or any later version.  This program is
-    distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
-    See <http://www.gnu.org/licenses/> for details.  */
+ *  it under the terms of the GNU Affero General Public License, either
+ *  version 3 of the License, or any later version.  This program is
+ *  distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
+ *  See <http://www.gnu.org/licenses/> for details.
+ */
+
+/*  Custom Colors:
+ *     Main Background: #607d8b
+ *     Header/Status Bar Background: #3f51b5
+ *     Normal Input Background: #eeeecc
+ *     Highlight Input Background: #ffff90
+ *     Selected Background: #cd2c00
+ *     Disabled Text: #bbbbbb
+ */
 
 body {
-    background-color: #1f2e25;
-    color: #ffffcf;
+    background-color: #607d8b;
+    color: white;
 }
 
-a {
-    color: #8ff;
-    text-decoration: none;
+::selection {
+    background: #cd2c00;
+    color: white;
 }
 
-a:hover {
-    text-decoration: underline;
+::-moz-selection {
+    background: #cd2c00;
+    color: white;
 }
 
-.flex-container {
+* {
+    box-sizing: border-box;
+}
+
+sup {
+    font-size: 0.6rem;
+    vertical-align: top;
+    line-height: 100%;
+}
+
+ul {
+    margin-top: 0;
+    padding-left: 1.2rem;
+}
+
+.banner {
+    width: 40rem;
+    margin: 0.1rem 1rem;
+    padding: 0;
+    text-align: center;
+    font-family:sans-serif;
+    font-style: italic;
+    color: #3f51b5;
+    text-shadow: -1px -1px 4px white, 2px 2px 2px black;
+}
+
+.banner-caps {
+    font-size: 6rem;
+    line-height: 95%;
+}
+
+.banner-upper {
+    font-size: 4rem;
+    font-weight: bold;
+    vertical-align: top;
+}
+
+.banner-lower {
+    font-size: 4rem;
+    font-weight: bold;
+}
+
+.column-container {
+    display: -webkit-flex;
     display: flex;
+    -webkit-flex-wrap: wrap;
     flex-wrap: wrap;
 }
 
-.flex-item {
-    width: 250px;
-    padding: 10px 20px 5px;
+.column-item {
+    width: 19rem;
+    margin: 0.1rem 1rem;
 }
 
-input {
+input[type=text] {
     width: 100%;
-    margin: 5px 0px;
+    margin: 0.3rem 0;
+    padding: 2px;
+    border-radius: 6px;
+    background-color: #eeeecc;
+    color: black;
 }
 
-#statusline {
-    padding: 0px 20px;
+input[type=text]:focus {
+    background-color: #ffff90;
+}
+
+input[type=text]:disabled {
+    color: #bbbbbb;
+}
+
+.button-row {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: center;
+    justify-content: center;
+    position: relative;
+    width: 40rem;
+    margin: 0.3rem 1rem 0.3rem;
+}
+
+.unit-button, .gen-button {
+    width: 6rem;
+    height: 1.1rem;
+    margin: 0 0.5rem;
+    color: white;
+    background-color: #3f51b5;
+    border: 0 none;
+    border-radius: 6px;
+    box-shadow: 2px 2px 2px black;
+}
+
+.bot-button {
+    width: 6rem;
+    height: 1.4rem;
+    margin: .3rem 2rem;
+    color: white;
+    background-color: #3f51b5;
+    border: 0 none;
+    border-radius: 6px;
+    box-shadow: 2px 2px 2px black;
+}
+
+button:disabled {
+    color: #bbbbbb;
+}
+
+.dropdown {
+    position: absolute;
+    display: none;
+    z-index: 1;
+    top: 100%;
+    width: 10rem;
+    max-height: 28em;
+    padding: 0;
+    margin: 0;
+    overflow: auto;
+    cursor: default;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 2px solid black;
+    border-radius: 6px;
+    background-color: #eeeecc;
+    color: black;
+}
+
+.dropdown div {
+    padding: 0.3rem 1rem;
+}
+
+.dropdown div:hover {
+    background-color: #ffff90;
+}
+
+#status-line {
+    width: 40rem;
+    margin: 0.3rem 1rem;
+    padding: 2px;
+    border-radius: 6px;
+    background-color: #3f51b5;
+}
+
+.unit-list {
+    table-layout: fixed;
+    border-collapse: collapse;
+    width: 40rem;
+    margin: 0.8rem 1rem;
+    overflow: auto;
+    cursor: default;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.unit-list thead, .unit-list tr {
+    display: block;
+    position: relative;
+}
+
+.unit-list thead {
+    border-radius: 6px 6px 0 0;
+    background-color: #3f51b5;
+    color: white;
+}
+
+.unit-list tbody {
+    display: block;
+    overflow: auto;
+    width: 100%;
+    height: 19.5rem;
+    border-radius: 0 0 6px 6px;
+    background-color: #eeeecc;
+    color: black;
+}
+
+.unit-list th, .unit-list td {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 2px 5px;
+}
+
+.unit-list td:nth-child(1),
+.unit-list th:nth-child(1) {
+    min-width: 16rem;
+    max-width: 16rem;
+}
+
+.unit-list td:nth-child(2),
+.unit-list th:nth-child(2) {
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    text-align: center;
+    min-width: 7rem;
+    max-width: 7rem;
+}
+
+.unit-list td:nth-child(3),
+.unit-list th:nth-child(3) {
+    min-width: 15.5rem;
+    max-width: 15.5rem;
+}
+
+.modal-background {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: black;
+    background-color: rgba(0,0,0,0.7);
+}
+
+.modal-box {
+    margin: 8rem 12rem;
+    width: 18rem;
+    border: 3px solid #3f51b5;
+    background-color: #eeeecc;
+    color: black;
+}
+
+.modal-wide-box {
+    margin: 8rem 12rem;
+    width: 24rem;
+    border: 3px solid #3f51b5;
+    background-color: #eeeecc;
+    color: black;
+}
+
+.modal-header {
+    padding: 0.3rem;
+    font-weight: bold;
+    background-color: #3f51b5;
+    color: white;
+}
+
+.modal-content {
+    padding: 0.6rem;
+    overflow: hidden;
+}
+
+.close-button {
+    float: right;
+    cursor: pointer;
+    font-family:sans-serif;
+}
+
+input[type=button] {
+    float: right;
+    margin: 0.3em;
+}
+
+.img-float {
+    float: left;
+    margin-right: 1rem;
 }

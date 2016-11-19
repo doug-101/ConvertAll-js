@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+
+<!-- ConvertAll, a versatile unit converter -->
+<!-- Copyright (C) 2016, Douglas W. Bell -->
+
+<!-- This program is free software: you can redistribute it and/or modify
+     it under the terms of the GNU Affero General Public License, either
+     version 3 of the License, or any later version.  This program is
+     distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
+     See <http://www.gnu.org/licenses/> for details. -->
+
+<html>
+<head>
+<meta charset="UTF-8" />
+<link rel="icon" href="favicon.png" />
+<style>
+* {
+  box-sizing: border-box;
+}
+body {
+  background-color: #eeeecc;
+  color: black;
+}
+.left-nav {
+  width: 15rem;
+  height: 100%;
+  top: 0;
+  left: 0;
+  padding: 1rem;
+  position: fixed;
+  overflow: auto;
+  background-color: #3f51b5;
+  color: white;
+}
+.left-nav ul {
+  list-style-type: none;
+  padding-left: 1.2rem;
+  line-height: 120%;
+}
+.left-nav a {
+  color: white;
+  text-decoration: none;
+}
+.left-nav a:hover {
+  color: #ffff90;
+}
+.main-body {
+  margin-left: 16rem;
+}
+.main-head {
+  text-align: center;
+}
+</style>
+<title>ConvertAll Help</title>
+</head>
+
+<body>
+
+<div class="left-nav">
+<a href="#top">ConvertAll Help</a>
+<ul>
+<li><a href="#background">Background</a></li>
+<li><a href="#features">Features</a></li>
+<li><a href="#license">License</a>
+<li><a href="#browser">Browser Requirements</a>
+  <ul><li><a href="#online">Online</a></li>
+  <li><a href="#offline">Offline</a></li></ul></li>
+<li><a href="#using">Using ConvertAll</a>
+  <ul><li><a href="#basics">Basics</a></li>
+  <li><a href="#combine">Combining Units</a></li>
+  <li><a href="#nonlinear">Non-Linear Conversions</a></li>
+  <li><a href="#shortcut">Shortcuts</a></li>
+  <li><a href="#options">Options</a></li></ul></li>
+<li><a href="#revs">Revision History</a></li>
+<li><a href="#contact">Questions or Comments?</a></li>
+</ul>
+</div>
+
+<div class="main-body">
+<div class="main-head" name="top">
+<h1>ConvertAll</h1>
+<h2>a unit conversion program</h2>
+
+<p>Written by Doug Bell<br>
+Version 0.1.1<br>
+November 20, 2016</p>
+</div>
+
+<h2><a name="background"></a>Background</h2>
+
+<p>Why write another unit converter?  There are plenty of them out there.
+Well, I couldn't find one that worked quite the way I wanted.</p>
+
+<p>With ConvertAll, you can combine the units any way you want.  If you want
+to convert from inches per decade, that's fine.  Or from meter-pounds.  Or
+from cubic nautical miles.  The units don't have to make sense to anyone
+else.</p>
+
+<p>Since I'm not in the software business, I'm making this converter free for
+anyone to use, both online and offline.  It also can be freely distributed and
+modified, as long as it stays available under the same license terms.  If you
+like the software, feel free to let others know about it.  And let me know
+what you think - my email address is doug101 AT bellz DOT org</p>
+
+<h2><a name="features"></a>Features</h2>
+
+<ul>
+
+  <li>The base units for conversion may be typed (with auto-completion) or
+  selected from a list.</li>
+
+  <li>As a unit is typed, the unit list is automatically filtered to show only
+  units with matching words.</li>
+
+  <li>In general, either a unit's full name or its abbreviation can be
+  used.</li>
+
+  <li>Units may be combined with the "*" and "/" operators.</li>
+
+  <li>Units may be raised to powers (squared, cubed, etc.) with the "^"
+  operator.</li>
+
+  <li>Units in the denominator may be grouped with parenthesis.</li>
+
+  <li>Units with non-linear scales, such as temperature, can also be
+  converted.</li>
+
+  <li>Recently used unit combinations may be picked from a menu.</li>
+
+  <li>Numbers may be entered on either the "From" or the "To" units side, for
+  conversions in both directions.</li>
+
+  <li>Basic mathematical expressions may be entered in place of numbers.</li>
+
+  <li>Options control the formatting of numerical results.</li>
+
+  <li>The unit data includes over 500 units.</li>
+
+</ul>
+
+<h2><a name="license"></a>License</h2>
+
+<p>ConvertAll is free software; you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published by
+the Free Software Foundation; either Version 3 of the License, or (at
+your option) any later version.</p>
+
+<p>This program is distributed in the hope that it will be useful, but WITHOUT
+ANY WARRANTY.  See the <a
+href="https://www.gnu.org/licenses/agpl-3.0.en.html">GNU AGPL License</a> for
+more information.</p>
+
+<h2><a name="browser"></a>Browser Requirements</h2>
+
+<h3><a name="online"></a>Online</h3>
+
+<p>ConvertAll should run on most "modern" web browsers.  Here are minimum
+browser version numbers:
+<ul>
+  <li>Chrome/Chromium 49</li>
+  <li>Firefox 49</li>
+  <li>Internet Explorer 11</li>
+  <li>Edge 14</li>
+  <li>Safari 9.1</li>
+  <li>IOS Safari 9.3</li>
+  <li>Android Chrome 53</li>
+  <li>Opera 41</li>
+</ul></p>
+
+<p>ConvertAll has not been extensively tested with all of these browsers.
+Please report any bugs.</p>
+
+<h3><a name="offline"></a>Offline</h3>
+
+<p>A ConvertAll zip file can be downloaded for offline use.  Simply extract
+the files and open the "convertall.html" file.</p>
+
+<p>Running offline does not work with the Internet Explorer web browser.
+Please choose a different browser.</p>
+
+<h2><a name="using"></a>Using ConvertAll</h2>
+
+<h3><a name="basics"></a>Basics</h3>
+
+<p>Simply type a unit name in the "From Unit" edit window.  As you type, the
+list below the window will be filtered to show only matching units.  Matching
+unit names contain words starting with the words that are typed.  Either type
+the complete unit name/abbreviation or hit the return key to use the unit
+highlighted (yellow) in the list.  Of course, clicking with the mouse on a
+unit in the list will also add the unit to the edit window.  You may also use
+the up and down arrow keys to highlight nearby units from the list.</p>
+
+<p>Repeat the unit selection in the "To Unit" edit window.  When done, if the
+units are compatible, the numeric edit windows below the unit lists will
+activate.  A number may be entered into either numeric window and the other
+window will display the conversion result.</p>
+
+<h3><a name="combine"></a>Combining Units</h3>
+
+<p>The real strength of ConvertAll lies in its ability to combine multiple
+units.  Simply type the unit names with an '*' or a '/' between them.  This
+allows the entry of units such as "ft * lbf" or "mi / hr".  The '^' symbol may
+be used for exponents, such as "ft^3" or "ft * lbm / sec^2".  Negative
+exponents are allowed for units such as "sec^-1" (per second), but may switch
+the multiplication or division symbol ("ft * sec^-2" becomes "ft /
+sec^2").</p>
+
+<p>Multiplication and division have the same precedence, so they are evaluated
+left-to-right.  Parenthesis may also be used to group units in the
+denominator.  So "m / sec / kg" can also be entered as "m / (sec * kg)".  The
+version with parenthesis is probably less confusing.</p>
+
+<p>The buttons below the unit text boxes can also be used to add operators to
+the active unit that is closest to the cursor.  The Square and Cube buttons
+will add or replace exponents.  The Multiply and Divide buttons will add "*"
+and "/" operators.</p>
+
+<p>Similarly, clicking on a unit from the list replaces the unit closest to
+the cursor in the active unit edit box.</p>
+
+<p>The "Clear Unit" button below the unit text boxes may be used to empty the
+unit edit window to allow a new unit to be entered.</p>
+
+<h3><a name="nonlinear"></a>Non-Linear Conversions</h3>
+
+<p>The conversion of some units is non-linear.  Examples of these include the
+Fahrenheit and Celsius temperature scales (due to an offset zero point) and
+the American Wire Gauge (logarithmic).  The non-linear units are labeled as
+such in the comments column.</p>
+
+<p>These units can be converted only when they are not combined with other
+units or used with an exponential operator.  Otherwise the conversion would
+not be meaningful.</p>
+
+<h3><a name="shortcut"></a>Shortcuts</h3>
+
+<p>When typing unit names, spaces are ignored, so they may be skipped.  For
+squared and cubed units (positive exponents of 2 or 3) the "^" symbol does not
+need to be typed.</p>
+
+When a partially typed unit is highlighted (yellow) in the list, hitting enter
+will complete the name.  The up an ddown arrow keys can be used to highlight
+nearby units in the list prior to hitting enter.  The unit closet to the
+cursor will be replaced.</p>
+
+<p>The "Recent Unit" button opens a menu of recently used units and unit
+combinations.  The current unit combination is replaced with any selections
+from this menu.</p>
+
+<p>The tab key can be used to cycle between the "From" and "To" unit test
+boxes and the "From" and "To" number editors.</p>
+
+<p>The number to be converted may be entered in either the "From" or "To" unit
+side.  Standard or scientific notation may be used, or an expression including
+the normal math operators (+, -, *, /, **) and parenthesis may be entered.</p>
+
+<h3><a name="options"></a>Options</h3>
+
+<p>The "Options" button allows for changing several default settings.  These
+settings are automatically stored so that ConvertAll will load with the
+settings last used.</p>
+
+<p>The first options control the display of numerical results, including the
+use of scientific notation and the number of decimal places.  Be cautious
+about setting the number of decimal places to a low value, which can result in
+a significant loss of accuracy.  Six places or higher is recommended (eight is
+the default).</p>
+
+<p>There is an option to set the number of recent units to be saved.  Setting
+it to zero will disable the Recent Unit button.  Another option will
+automatically load the most recent previous units at startup.</p>
+
+<h2><a name="revs"></a>Revision History</h2>
+
+<h3>November 18, 2016 - Release 0.1.0</h3>
+
+<ul>
+  <li>Initial release of the JavaScript version of ConvertAll.</li>
+</ul>
+
+<h2><a name="contact"></a>Questions or Comments?</h2>
+
+<p>I can be contacted by email at: doug101 AT bellz DOT org<br> I welcome any
+feedback, including reports of any bugs you find.  Also, you can periodically
+check back to <a href="http://www.bellz.org">www.bellz.org</a> for any
+updates.</p>
+
+</div>
+</body>
+</html>

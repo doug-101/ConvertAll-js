@@ -13,6 +13,7 @@
 
 <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=23rem, initial-scale=1.0">
     <link rel="stylesheet" href="convertall.css" />
     <link rel="icon" href="favicon.png" />
 
@@ -20,28 +21,161 @@
 </head>
 
 <body>
-    <form id="mainform" action="">
-        <div class="flex-container">
-            <div class="flex-item">
-                <label for="fromeditor">From Unit:</label><br />
-                <input type="text" id="fromeditor" tabindex="1" autofocus />
-                <br />
-                <span id="fromoutput"></span><br />
-                <input type="text" id="fromnum" tabindex="3"/>
+    <form id="main-form" action="" autocomplete="off">
+        <div class="banner"><span class="banner-caps">C</span><span
+            class="banner-upper">ONVERT</span><span
+            class="banner-caps">A</span><span
+            class="banner-lower">LL</span></div>
+        <div class="column-container">
+            <div class="column-item">
+                <label for="from-editor">From Unit:</label><br />
+                <input type="text" id="from-editor" tabindex="1"
+                spellcheck="false" autocomplete="off" autofocus />
             </div>
-            <div class="flex-item">
-                <label for="toeditor">To Unit:</label><br />
-                <input type="text" id="toeditor" tabindex="2"/><br />
-                <span id="tooutput"></span><br />
-                <input type="text" id="tonum" tabindex="4"/>
+            <div class="column-item">
+                <label for="to-editor">To Unit:</label><br />
+                <input type="text" id="to-editor" tabindex="2"
+                spellcheck="false" autocomplete="off" />
             </div>
         </div>
-        <div id="statusline"></div>
+        <div class="button-row">
+            <button type="button" class="unit-button" tabindex="-1"
+                onclick="addUnitText(this)" value="^2">Square (^2)</button>
+            <button type="button" class="unit-button" tabindex="-1"
+                onclick="addUnitText(this)" value="^3">Cube (^3)</button>
+            <button type="button" class="unit-button" tabindex="-1"
+                onclick="addUnitText(this)" value="*">Multiply (*)</button>
+            <button type="button" class="unit-button" tabindex="-1"
+                onclick="addUnitText(this)" value="/">Divide (/)</button>
+        </div>
+        <div class="button-row">
+            <button type="button" class="unit-button" tabindex="-1"
+                onclick="clearUnitText()">Clear Unit</button>
+            <div>
+                <button type="button" id="recent-button" class="gen-button"
+                    tabindex="-1" onclick="showRecentUnits()">Recent Unit
+                </button>
+                <div id="recent-menu" class="dropdown"></div>
+            </div>
+            <div>
+                <button type="button" id="filter-button" class="gen-button"
+                    tabindex="-1" onclick="showFilters()">Filter List
+                </button>
+                <div id="filter-menu" class="dropdown"></div>
+            </div>
+        </div>
+        <table id="unit-list-table" class="unit-list">
+            <thead>
+                <tr id="header-row"></tr>
+            </thead>
+            <tbody id="unit-list-body">
+            </tbody>
+        </table>
+        <div class="column-container">
+            <div class="column-item">
+                <span id="from-status"></span><br />
+                <input type="text" id="from-num" tabindex="3"
+                spellcheck="false"/>
+            </div>
+            <div class="column-item">
+                <span id="to-status"></span><br />
+                <input type="text" id="to-num" tabindex="4"
+                spellcheck="false"/>
+            </div>
+        </div>
+        <div id="status-line"></div>
+        <div class="button-row">
+            <button type="button" class="bot-button" tabindex="-1"
+                onclick="settings.showOptions()">Options</button>
+            <button type="button" class="bot-button" tabindex="-1"
+                onclick="showHelp()">Help</button>
+            <button type="button" class="bot-button" tabindex="-1"
+                onclick="showAbout()">About</button>
+        </div>
     </form>
+    <div id="opt-dialog" class="modal-background">
+        <div class="modal-box">
+            <div class="modal-header">
+                ConvertAll Options
+                <div id="close-opt-button" class="close-button">X</div>
+            </div>
+            <div class="modal-content">
+                <form id="opt" action="">
+                    Number Display:<br />
+                    <input type="radio" name="display" id="short"
+                        value="short" />
+                    <label for="short">Short representation</label><br />
+                    <input type="radio" name="display" id="fixed"
+                        value="fixed" />
+                    <label for="fixed">Fixed decimal places</label><br />
+                    <input type="radio" name="display" id="scientific"
+                        value="scientific" />
+                    <label for="scientific">Scientific notation</label><br />
+                    <input type="radio" name="display" id="engineering"
+                        value="engineering" />
+                    <label for="engineering">Engineering notation</label><br />
+                    Decimal Places:
+                    <input type="number" id="dec-places" min="0" max="9" />
+                    <br /><br />
+                    Number of Recent Units:
+                    <input type="number" id="num-recent" min="0" max="99" />
+                    <br /><br />
+                    On Startup:<br />
+                    <input type="checkbox" id="load-recent" />
+                    <label for="load-recent">Load most recent units</label><br />
+                    <input type="checkbox" id="show-tip" />
+                    <label for="show-tip">Show tip dialog box</label><br />
+                    <br />
+                    <input type="button" id="submit-button" value="Submit" />
+                    <input type="button" id="reset-button" value="Reset" />
+                </form>
+            </div>
+        </div>
+    </div>
+    <div id="about-dialog" class="modal-background">
+        <div class="modal-wide-box">
+            <div class="modal-header">
+                ConvertAll - About
+                <div class="close-button" onclick="hideAbout()">X</div>
+            </div>
+            <div class="modal-content">
+                <form id="about" action="">
+                    <img src="favicon.png" alt="" class="img-float"
+                        height="64" width="64" />
+                    ConvertAll, a versatile unit converter<br /><br />
+                    Version <span id="version"></span><br />
+                    by <span id="author"></span><br />
+                    <input type="button" value="OK" onclick="hideAbout()" />
+                </form>
+            </div>
+        </div>
+    </div>
+    <div id="tip-dialog" class="modal-background">
+        <div class="modal-wide-box">
+            <div class="modal-header">
+                ConvertAll Tip - Combining Units
+                <div class="close-button" onclick="hideTip()">X</div>
+            </div>
+            <div class="modal-content">
+                <form id="tip" action="">
+                    ConvertAll's strength is the ability to combine units:
+                    <ul>
+                        <li>Type "m / s" to get meters per second</li>
+                        <li>Type "ft * lbf" to get foot-pounds (torque)</li>
+                        <li>Type "in^2" to get square inches</li>
+                        <li>Type "m^3" to get cubic meters</li>
+                        <li>or any other combinations you can imagine</li>
+                    </ul><br />
+                    <input type="checkbox" id="show-tip-box" checked />
+                    <label for="show-tip-box">Show this tip at startup</label>
+                    <input type="button" value="OK" onclick="hideTip()" />
+                </form>
+            </div>
+        </div>
+    </div>
 
     <script src="units.js"></script>
     <script src="convertall.js"></script>
-
 </body>
 
 </html>
