@@ -13,7 +13,7 @@
 "use strict";
 var progName = "ConvertAll";
 var author = "Doug Bell"
-var version = "0.1.0";
+var version = "0.1.1";
 
 var selectedBackground = "#cd2c00";
 var highlightBackground = "#ffff90";
