@@ -654,7 +654,6 @@ UnitGroup.prototype.addOperator = function(oper) {
     var unit = new UnitAtom("");
     if (oper == "/") unit.unitExp = -1;
     if (group != this && group.unitList[0].unitExp < 0) unit.unitExp *= -1;
-    console.log(group == this);
     group.unitList.splice(i + 1, 0, unit);
     this.valid = false;
 }
@@ -908,7 +907,8 @@ UnitController.prototype.updateCurrentUnit = function(fullUpdate) {
     if (fullUpdate || this.unitGroup.currentUnitNum != prevCurrentUnit) {
         unitData.filterUnits(this.unitGroup.currentUnitName());
     }
-    this.setButtonsEnabled(true, unitStr.trim().length > 0);
+    this.setButtonsEnabled(true, unitStr.trim().length > 0,
+                           this.unitGroup.currentUnitName().length > 0);
 }
 UnitController.prototype.replaceAllText = function() {
     // replace the editor text with the unit group string
@@ -917,12 +917,15 @@ UnitController.prototype.replaceAllText = function() {
     var cursorPos = this.editor.value.length - revCursorPos;
     this.editor.setSelectionRange(cursorPos, cursorPos);
 }
-UnitController.prototype.setButtonsEnabled = function(hasFocus, hasContent) {
+UnitController.prototype.setButtonsEnabled = function(hasFocus, hasContent,
+                                                      hasCurrentUnit) {
     // enable or disable unit-specific buttons
     var buttons = document.getElementsByClassName("unit-button");
     for (var i = 0; i < buttons.length; i++) {
-        buttons[i].disabled = !hasContent;
+        buttons[i].disabled = !hasCurrentUnit;
     }
+    var clearButton = document.getElementById("clear-button");
+    clearButton.disabled = !hasContent;
     var recentButton = document.getElementById("recent-button");
     recentButton.disabled = !(hasFocus && settings.recentUnits.length > 0);
 }
@@ -946,7 +949,7 @@ function NumController(numEditId, otherNumEditId, unitControl, otherControl) {
     this.numEdit.onfocus = function() {
         // focus on number editors eliminates unit text editor activity
         if (activeController) {
-            activeController.setButtonsEnabled(false, false);
+            activeController.setButtonsEnabled(false, false, false);
             activeController = null;
             unitData.filterUnits("");
         }
@@ -1076,6 +1079,7 @@ function updateFocus() {
 
 function addUnitText(elem) {
     // add power or operator to units based on a button click
+    unitData.selectHighlight();
     var text = elem.value;
     if (text.slice(0, 1) == "^") {
         activeController.unitGroup.setCurrentExp(parseInt(text.slice(1)));
