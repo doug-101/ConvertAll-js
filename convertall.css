@@ -1,7 +1,7 @@
 /*  convertall.css, the main CSS file  */
 
 /*  ConvertAll, a versatile unit converter  */
-/*  Copyright (C) 2016, Douglas W. Bell  */
+/*  Copyright (C) 2017, Douglas W. Bell  */
 
 /*  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU Affero General Public License, either
@@ -61,18 +61,18 @@ ul {
 }
 
 .banner-caps {
-    font-size: 6rem;
+    font-size: 5rem;
     line-height: 95%;
 }
 
 .banner-upper {
-    font-size: 4rem;
+    font-size: 3rem;
     font-weight: bold;
     vertical-align: top;
 }
 
 .banner-lower {
-    font-size: 4rem;
+    font-size: 3rem;
     font-weight: bold;
 }
 
@@ -210,7 +210,7 @@ button:disabled {
     display: block;
     overflow: auto;
     width: 100%;
-    height: 19.5rem;
+    height: 14rem;
     border-radius: 0 0 6px 6px;
     background-color: #eeeecc;
     color: black;

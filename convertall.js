@@ -2,7 +2,7 @@
 //  convertall.js, the main JavaScript program file
 
 //  ConvertAll, a versatile unit converter
-//  Copyright (C) 2016, Douglas W. Bell
+//  Copyright (C) 2017, Douglas W. Bell
 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU Affero General Public License, either
