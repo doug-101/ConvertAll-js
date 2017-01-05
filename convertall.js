@@ -463,20 +463,30 @@ function UnitAtom(text) {
     this.unitExp = 1;
     this.unitName = "";
     this.valid = true;
-    this.partialExp = false;
+    this.partialExp = "";  // starts with '^' for incomplete exp
     if (text) {
         var parts = text.split("^", 2);
         var key = parts[0].replace(/ /g, "").toLowerCase();
         if (parts.length > 1 && parts[0]) {
             var expText = parts[1].trim();
             var exp = Number(expText);
-            if (expText && exp % 1 === 0) {  // check for integer
+            if (expText && !isNaN(exp)) {  // check for valid number
                 this.unitExp = exp;
+                if (exp.toString() != expText) {
+                    this.partialExp = "^" + expText;
+                } else if (exp == 1) {
+                    this.partialExp = "^1";  // keep for start of "1.5"
+                }
             } else {
                 this.valid = false;
-                this.partialExp = true;
-                if (expText == "-") {
-                    this.unitExp = -1;
+                if (expText == ".") {
+                    this.partialExp = "^0.";
+                } else if (expText == "-.") {
+                    this.partialExp = "^-0.";
+                } else if (expText.slice(0, 1) == "-") {
+                    this.partialExp = "^-";
+                } else {
+                    this.partialExp = "^";
                 }
             }
         } else if ((key.slice(-1) == "2" || key.slice(-1) == "3") &&
@@ -506,7 +516,7 @@ UnitAtom.prototype.unitString = function(useAbsExp) {
     var text = this.unitName;
     var exp = useAbsExp ? Math.abs(this.unitExp) : this.unitExp;
     if (this.partialExp) {
-        text += exp >= 0 ? "^" : "^-";
+        text += this.partialExp;
     } else if (exp !== 1) {
         text += "^" + exp;
     }
@@ -695,7 +705,7 @@ UnitGroup.prototype.statusString = function() {
     var outputText = "No unit set";
     if (this.valid) {
         outputText = this.groupString();
-        outputText = outputText.replace(/\^([0-9]+)/g,"<sup>$1</sup>");
+        outputText = outputText.replace(/\^([0-9.-]+)/g,"<sup>$1</sup>");
     }
     return outputText;
 }
