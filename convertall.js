@@ -13,7 +13,7 @@
 "use strict";
 var progName = "ConvertAll";
 var author = "Doug Bell"
-var version = "0.1.1";
+var version = "0.1.2";
 
 var selectedBackground = "#cd2c00";
 var highlightBackground = "#ffff90";
@@ -1022,8 +1022,12 @@ NumController.prototype.formatNumber = function(num) {
             numStr = num.toFixed(settings.numDecPlaces);
         }
     } else {  // engineering
-        var exp = Math.floor(Math.log(Math.abs(num)) / Math.log(10));
-        exp = 3 * Math.floor(exp / 3);
+        if (num != 0) {
+            var exp = Math.floor(Math.log(Math.abs(num)) / Math.log(10));
+            exp = 3 * Math.floor(exp / 3);
+        } else {
+            exp = 0;
+        }
         num = num / Math.pow(10, exp);
         num = Math.round(num * Math.pow(10, settings.numDecPlaces)) /
                 Math.pow(10, settings.numDecPlaces);
