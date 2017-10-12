@@ -536,6 +536,7 @@ data = [
 {"name":"metric horsepower", "equiv":"75 kgf*m/s", "type":"power"},
 {"name":"ton refrigeration", "equiv":"12000 Btu/hr", "type":"power"},
 {"name":"MBH", "equiv":"1000 Btu/hr", "type":"power", "unabbrev":"1000 Btu/hr"},
+{"name":"boiler horsepower", "equiv":"33475 Btu/hr", "type":"power"},
 {"name":"hertz", "equiv":"unit/sec", "type":"frequency"},
 {"name":"Hz", "equiv":"hertz", "type":"frequency", "unabbrev":"hertz"},
 {"name":"millihertz", "equiv":"0.001 Hz", "type":"frequency"},
