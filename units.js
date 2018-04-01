@@ -2,7 +2,7 @@
 //  units.js, provides unit data
 
 //  ConvertAll, a versatile unit converter
-//  Copyright (C) 2016, Douglas W. Bell
+//  Copyright (C) 2018, Douglas W. Bell
 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU Affero General Public License, either
@@ -131,6 +131,7 @@ data = [
 {"name":"ring size", "equiv":"in", "type":"length", "fromeqn":"0.1018*x + 1.4216", "toeqn":"(x - 1.4216) / 0.1018", "comment":"US size, circum., non-linear"},
 {"name":"shoe size mens", "equiv":"in", "type":"length", "fromeqn":"x/3.0 + 7 + 1/3.0", "toeqn":"(x - 7 - 1/3.0) * 3", "comment":"US sizes, non-linear"},
 {"name":"shoe size womens", "equiv":"in", "type":"length", "fromeqn":"x/3.0 + 6 + 5/6.0", "toeqn":"(x - 6 - 5/6.0) * 3", "comment":"US sizes, non-linear"},
+{"name":"drill bit size", "equiv":"in", "type":"length", "fromeqn":"[[104,0.0031], [103,0.0035], [102,0.0039], [101,0.0043], [100,0.0047], [99,0.0051], [98,0.0055], [97,0.0059], [96,0.0063], [95,0.0067], [94,0.0071], [93,0.0075], [92,0.0079], [91,0.0083], [90,0.0087], [89,0.0091], [88,0.0095], [87,0.01], [86,0.0105], [85,0.011], [84,0.0115], [83,0.012], [82,0.0125], [81,0.013], [80,0.0135], [79,0.0145], [78,0.016], [77,0.018], [76,0.02], [75,0.021], [74,0.0225], [73,0.024], [72,0.025], [71,0.026], [70,0.028], [69,0.0292], [68,0.031], [67,0.032], [66,0.033], [65,0.035], [64,0.036], [63,0.037], [62,0.038], [61,0.039], [60,0.04], [59,0.041], [58,0.042], [57,0.043], [56,0.0465], [55,0.052], [54,0.055], [53,0.0595], [52,0.0635], [51,0.067], [50,0.07], [49,0.073], [48,0.076], [47,0.0785], [46,0.081], [45,0.082], [44,0.086], [43,0.089], [42,0.0935], [41,0.096], [40,0.098], [39,0.0995], [38,0.1015], [37,0.104], [36,0.1065], [35,0.11], [34,0.111], [33,0.113], [32,0.116], [31,0.12], [30,0.1285], [29,0.136], [28,0.1405], [27,0.144], [26,0.147], [25,0.1495], [24,0.152], [23,0.154], [22,0.157], [21,0.159], [20,0.161], [19,0.166], [18,0.1695], [17,0.173], [16,0.177], [15,0.18], [14,0.182], [13,0.185], [12,0.189], [11,0.191], [10,0.1935], [9,0.196], [8,0.199], [7,0.201], [6,0.204], [5,0.2055], [4,0.209], [3,0.213], [2,0.221], [1,0.228]]", "comment":"American drill bit gauge, non-linear"},
 {"name":"s", "equiv":"!", "type":"time", "unabbrev":"second"},
 {"name":"sec", "equiv":"s", "type":"time", "unabbrev":"second"},
 {"name":"second", "equiv":"s", "type":"time"},
@@ -266,6 +267,8 @@ data = [
 {"name":"bit", "equiv":"!", "type":"data"},
 {"name":"kilobit", "equiv":"1000 bit", "type":"data", "comment":"based on power of 10"},
 {"name":"megabit", "equiv":"1000 kilobit", "type":"data", "comment":"based on power of 10"},
+{"name":"gigabit", "equiv":"1000 megabit", "type":"data", "comment":"based on power of 10"},
+{"name":"terabit", "equiv":"1000 gigabit", "type":"data", "comment":"based on power of 10"},
 {"name":"byte", "equiv":"8 bit", "type":"data"},
 {"name":"B", "equiv":"byte", "type":"data", "unabbrev":"byte"},
 {"name":"kilobyte", "equiv":"1024 byte", "type":"data", "comment":"based on power of 2"},
