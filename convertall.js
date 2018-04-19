@@ -2,7 +2,7 @@
 //  convertall.js, the main JavaScript program file
 
 //  ConvertAll, a versatile unit converter
-//  Copyright (C) 2017, Douglas W. Bell
+//  Copyright (C) 2018, Douglas W. Bell
 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU Affero General Public License, either
@@ -13,7 +13,7 @@
 "use strict";
 var progName = "ConvertAll";
 var author = "Doug Bell"
-var version = "0.1.3";
+var version = "0.1.4";
 
 var selectedBackground = "#cd2c00";
 var highlightBackground = "#ffff90";
@@ -796,11 +796,13 @@ UnitGroup.prototype.nonLinearCalc = function(num, isFrom) {
         }
     } else {   // extrapolation list
         var data = eval(unit.fromEqn);
+        var tmp;
         if (!isFrom) {  // reverse the data groups
             data = data.map(function(group) {
-                var tmp = group[0];
+                tmp = group[0];
                 group[0] = group[1];
                 group[1] = tmp;
+                return group;
             });
         }
         data.sort(function(a, b) {
