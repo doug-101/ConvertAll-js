@@ -88,7 +88,7 @@ ul {
     margin: 0.1rem 1rem;
 }
 
-input[type=text] {
+.text-input {
     width: 100%;
     margin: 0.3rem 0;
     padding: 2px;
@@ -97,11 +97,11 @@ input[type=text] {
     color: black;
 }
 
-input[type=text]:focus {
+.text-input:focus {
     background-color: #ffff90;
 }
 
-input[type=text]:disabled {
+.text-input:disabled {
     color: #bbbbbb;
 }
 
@@ -127,9 +127,9 @@ input[type=text]:disabled {
 }
 
 .bot-button {
-    width: 6rem;
+    width: 5rem;
     height: 1.4rem;
-    margin: .3rem 2rem;
+    margin: 0.3rem 0.5rem;
     color: white;
     background-color: #3f51b5;
     border: 0 none;
@@ -266,8 +266,16 @@ button:disabled {
 }
 
 .modal-wide-box {
-    margin: 8rem 12rem;
+    margin: 8rem 10rem;
     width: 24rem;
+    border: 3px solid #3f51b5;
+    background-color: #eeeecc;
+    color: black;
+}
+
+.modal-widest-box {
+    margin: 8rem 8rem;
+    width: 28rem;
     border: 3px solid #3f51b5;
     background-color: #eeeecc;
     color: black;
@@ -285,13 +293,18 @@ button:disabled {
     overflow: hidden;
 }
 
+.align-label {
+    text-align: right;
+    padding: 0.3em;
+}
+
 .close-button {
     float: right;
     cursor: pointer;
     font-family:sans-serif;
 }
 
-input[type=button] {
+.right-button {
     float: right;
     margin: 0.3em;
 }
@@ -299,4 +312,53 @@ input[type=button] {
 .img-float {
     float: left;
     margin-right: 1rem;
+}
+
+.fraction-list {
+    table-layout: fixed;
+    border-collapse: collapse;
+    width: 25rem;
+    margin: 0.8rem 0.5rem;
+    overflow: auto;
+}
+
+.fraction-list thead, .fraction-list tr {
+    display: block;
+    position: relative;
+}
+
+.fraction-list thead {
+    border-radius: 6px 6px 0 0;
+    background-color: #3f51b5;
+    color: white;
+}
+
+.fraction-list tbody {
+    display: block;
+    overflow: auto;
+    width: 100%;
+    height: 14rem;
+    border-radius: 0 0 6px 6px;
+    background-color: white;
+    color: black;
+}
+
+.fraction-list th, .fraction-list td {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 2px 5px;
+}
+
+.fraction-list td:nth-child(1),
+.fraction-list th:nth-child(1) {
+    min-width: 12rem;
+    max-width: 12rem;
+}
+
+.fraction-list td:nth-child(2),
+.fraction-list th:nth-child(2) {
+    border-left: 1px solid black;
+    min-width: 12rem;
+    max-width: 12rem;
 }

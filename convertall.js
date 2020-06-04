@@ -1123,6 +1123,10 @@ window.onclick = function(event) {
     if (event.target != filterButton) filterMenu.style.display = "none";
     if (event.target == settings.dialogContainer) {
         settings.hideOptions();
+    } else if (event.target == bases.dialogContainer) {
+        bases.hideBases();
+    } else if (event.target == fractions.dialogContainer) {
+        fractions.hideFractions();
     } else if (event.target == aboutDialogContainer) {
         hideAbout();
     } else if (event.target == tipDialogContainer) {
@@ -1177,6 +1181,220 @@ function showFilters() {
         updateFocus();
     }
 }
+
+function Bases() {
+    // Class to convert between number bases
+    this.numBits = 32;
+    this.twosComplement = false;
+    this.dialogContainer = document.getElementById("bases-dialog");
+    this.bitButton = document.getElementById("bases-bit-button");
+    this.setBitButtonText();
+    this.bitDialogContainer = document.getElementById("bases-bit-dialog");
+    this.editorList = [new BaseEditor(10, "decimal-base"),
+                       new BaseEditor(16, "hex-base"),
+                       new BaseEditor(8, "octal-base"),
+                       new BaseEditor(2, "binary-base")];
+}
+Bases.prototype.showBases = function() {
+    // show the bases dialog
+    this.dialogContainer.style.display = "block";
+}
+Bases.prototype.hideBases = function() {
+    // hide the bases dialog
+    this.dialogContainer.style.display = "none";
+    updateFocus();
+}
+Bases.prototype.convert = function(fromEditor) {
+    // do conversion with number in fromEditor
+    var value = fromEditor.intValue();
+    if (Number.isInteger(value)) {
+        for (var i = 0; i < this.editorList.length; i++) {
+            if (this.editorList[i] != fromEditor) {
+                this.editorList[i].setNumStr(value);
+            }
+        }
+    }
+}
+Bases.prototype.setBitButtonText = function() {
+    // set the legend for the bit settings button
+    var text = this.numBits + " bit, ";
+    if (!this.twosComplement) text += "no ";
+    text += " two's complement";
+    this.bitButton.value = text;
+}
+Bases.prototype.showBitDlg = function() {
+    // show the dialog to set bases bit limit and complement
+    document.getElementById("num-bits").value = this.numBits;
+    document.getElementById("two-comp").checked = this.twosComplement;
+    this.bitDialogContainer.style.display = "block";
+}
+Bases.prototype.updateBitSettings = function() {
+    // retrieve changes from bit settings dialog and close it
+    var value = document.getElementById("num-bits").value;
+    if (1 <= value <= 256) this.numBits = value;
+    this.twosComplement = document.getElementById("two-comp").checked;
+    this.setBitButtonText();
+    this.hideBitDlg();
+    this.editorList[0].handleChange();
+}
+Bases.prototype.hideBitDlg = function() {
+    // hide the bit limit dialog
+    this.bitDialogContainer.style.display = "none";
+}
+
+var bases = new Bases();
+
+function BaseEditor(base, editorName) {
+    // class to handle a single base editor
+    this.base = base;
+    this.editor = document.getElementById(editorName);
+    var that = this;
+    this.editor.oninput = function() {
+        that.handleChange();
+    }
+}
+BaseEditor.prototype.handleChange = function() {
+    // do the base conversion based on an editor change
+    var numStr = this.editor.value;
+    var chars = "0123456789abcdef".slice(0, this.base);
+    var exp = RegExp("[^-" + chars + "]", "ig");
+    var cleanStr = numStr.replace(exp, "");
+    if (numStr != cleanStr) this.editor.value = cleanStr;
+    bases.convert(this);
+}
+BaseEditor.prototype.intValue = function() {
+    // convert the entry to an integer and return it
+    var numStr = this.editor.value;
+    var num = parseInt(numStr, this.base)
+    return num;
+}
+BaseEditor.prototype.setNumStr = function(intValue) {
+    // convert the given integer to this base and set in editor
+    var digits = "0123456789abcdef".split("");
+    var remainder;
+    var result = "";
+    var sign = "";
+    if (intValue == 0) result = "0";
+    if (bases.twosComplement) {
+        if (intValue >= 2**(bases.numBits - 1) ||
+            intValue < (-2)**(bases.numBits - 1)) {
+            result = "overflow";
+            intValue = 0;
+        }
+        if (intValue < 0) {
+            intValue += 2**bases.numBits;
+        }
+    } else {
+        if (intValue < 0) {
+            intValue = Math.abs(intValue);
+            sign = "-";
+        }
+        if (intValue >= 2**bases.numBits) {
+            result = "overflow";
+            intValue = 0;
+        }
+    }
+    while (intValue > 0) {
+        remainder = intValue % this.base;
+        intValue = Math.floor(intValue / this.base)
+        result = digits[remainder] + result;
+    }
+    this.editor.value = sign + result;
+}
+
+function Fractions() {
+    // class to convert between fractional numbers
+    this.dialogContainer = document.getElementById("fractions-dialog");
+    this.exprEdit = document.getElementById("fract_expr");
+    this.twoDenomCheck = document.getElementById("fract_2_denom");
+    this.fractionListBody = document.getElementById("fraction-list-body");
+    var that = this;
+    this.exprEdit.oninput = function() {
+        var value = that.exprEdit.value;
+        var cleanValue = value.replace(/[^\d\. eE\+\-\*\/\(\)]/g, "");
+        if (value !== cleanValue) that.exprEdit.value = cleanValue;
+    }
+    this.exprEdit.onkeypress = function(e) {
+        var event = e || window.event;
+        var charCode = event.which || event.keyCode;
+        if ( charCode == '13' ) {
+            // return pressed
+            event.preventDefault();
+            that.calcFractions()
+        }
+    }
+}
+Fractions.prototype.showFractions = function() {
+    // show the fractions dialog
+    this.dialogContainer.style.display = "block";
+}
+Fractions.prototype.hideFractions = function() {
+    // hide the fractions dialog
+    this.dialogContainer.style.display = "none";
+    updateFocus();
+}
+Fractions.prototype.calcFractions = function() {
+    // calculate fractions based on input
+    this.fractionListBody.value = "";
+    var numEntry;
+    try {
+        var numEntry = Number(eval(this.exprEdit.value));
+    }
+    catch (e) {
+        numEntry = NaN;
+    }
+    if (isNaN(numEntry)) return;
+    var twoDenom = this.twoDenomCheck.checked;
+    var results = this.listFractions(numEntry, twoDenom);
+    var numer, denom;
+    var text = "";
+    for (var i = 0; i < results.length; i++) {
+        numer = results[i][0];
+        denom = results[i][1];
+        results[i] = "<tr><td>" + numer + "/" + denom + "</td><td>" +
+            numer / denom + "</td></tr>";
+    }
+    this.fractionListBody.innerHTML = results.join("\n");
+}
+Fractions.prototype.listFractions = function(decimal, powerOfTwo) {
+    // return a list of fractions based on given values
+    var results = [];
+    if (decimal == 0) return results;
+    var denom = 2;
+    var denomLimit = Math.pow(10, 9);
+    var minOffset = Math.pow(10, -10);
+    var minDelta = denomLimit;
+    var numer = Math.round(decimal * denom);
+    var delta = Math.abs(decimal - numer / denom);
+    var nextDenom, nextNumer, nextDelta;
+    while (denom < denomLimit) {
+        if (powerOfTwo) {
+            nextDenom = denom * 2;
+        } else {
+            nextDenom = denom + 1;
+        }
+        nextNumer = Math.round(decimal * nextDenom);
+        nextDelta = Math.abs(decimal - nextNumer / nextDenom);
+        if (numer != 0 && (delta == 0.0 || (delta < minDelta - minOffset &&
+                                            delta <= nextDelta))) {
+            results.push([numer, denom]);
+            if (delta == 0) break;
+            minDelta = delta;
+        }
+        denom = nextDenom;
+        numer = nextNumer;
+        delta = nextDelta;
+    }
+    if (results.length) {  // handle if first result is whole num (2/2, 4/2...)
+        numer = results[0][0];
+        denom = results[0][1];
+        if (denom == 2 && numer / denom == Math.round(numer / denom)) {
+            results[0] = [Math.round(numer / denom), 1];
+        }
+    }
+    return results;
+}
+var fractions = new Fractions();
 
 function showHelp() {
     // open a link to the help document

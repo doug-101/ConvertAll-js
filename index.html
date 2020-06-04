@@ -13,7 +13,7 @@
 
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=23rem, initial-scale=1.0">
+    <meta name="viewport" content="width=23rem, initial-scale=1.0" />
     <link rel="stylesheet" href="convertall.css" />
     <link rel="icon" href="favicon.png" />
 
@@ -29,13 +29,14 @@
         <div class="column-container">
             <div class="column-item">
                 <label for="from-editor">From Unit:</label><br />
-                <input type="text" id="from-editor" tabindex="1"
-                spellcheck="false" autocomplete="off" autofocus />
+                <input type="text" id="from-editor" class="text-input"
+                    tabindex="1" spellcheck="false" autocomplete="off"
+                    autofocus />
             </div>
             <div class="column-item">
                 <label for="to-editor">To Unit:</label><br />
-                <input type="text" id="to-editor" tabindex="2"
-                spellcheck="false" autocomplete="off" />
+                <input type="text" id="to-editor" class="text-input"
+                   tabindex="2" spellcheck="false" autocomplete="off" />
             </div>
         </div>
         <div class="button-row">
@@ -74,19 +75,23 @@
         <div class="column-container">
             <div class="column-item">
                 <span id="from-status"></span><br />
-                <input type="text" id="from-num" tabindex="3"
-                spellcheck="false"/>
+                <input type="text" id="from-num" class="text-input"
+                     tabindex="3" spellcheck="false"/>
             </div>
             <div class="column-item">
                 <span id="to-status"></span><br />
-                <input type="text" id="to-num" tabindex="4"
-                spellcheck="false"/>
+                <input type="text" id="to-num" class="text-input"
+                   tabindex="4" spellcheck="false"/>
             </div>
         </div>
         <div id="status-line"></div>
         <div class="button-row">
             <button type="button" class="bot-button" tabindex="-1"
                 onclick="settings.showOptions()">Options</button>
+            <button type="button" class="bot-button" tabindex="-1"
+                onclick="bases.showBases()">Bases</button>
+            <button type="button" class="bot-button" tabindex="-1"
+                onclick="fractions.showFractions()">Fractions</button>
             <button type="button" class="bot-button" tabindex="-1"
                 onclick="showHelp()">Help</button>
             <button type="button" class="bot-button" tabindex="-1"
@@ -126,8 +131,107 @@
                     <input type="checkbox" id="show-tip" />
                     <label for="show-tip">Show tip dialog box</label><br />
                     <br />
-                    <input type="button" id="submit-button" value="Submit" />
-                    <input type="button" id="reset-button" value="Reset" />
+                    <input type="button" id="submit-button"
+                        class="right-button" value="Submit" />
+                    <input type="button" id="reset-button"
+                        class="right-button" value="Reset" />
+                </form>
+            </div>
+        </div>
+    </div>
+    <div id="bases-dialog" class="modal-background">
+        <div class="modal-wide-box">
+            <div class="modal-header">
+                ConvertAll - Bases
+                <div class="close-button" onclick="bases.hideBases()">X</div>
+            </div>
+            <div class="modal-content">
+                <form id="bases" action="">
+                    <table>
+                        <tr>
+                            <td class="align-label">
+                                <label for="decimal-base">Decimal:</label>
+                            </td>
+                            <td><input type="text" id="decimal-base" /></td>
+                        </tr>
+                        <tr>
+                            <td class="align-label">
+                                <label for="hex-base">Hex:</label>
+                            </td>
+                            <td><input type="text" id="hex-base" /></td>
+                        </tr>
+                        <tr>
+                            <td class="align-label">
+                                <label for="octal-base">Octal:</label>
+                            </td>
+                            <td><input type="text" id="octal-base" /></td>
+                        </tr>
+                        <tr>
+                            <td class="align-label">
+                                <label for="binary-base">Binary:</label>
+                            </td>
+                            <td><input type="text" id="binary-base" /></td>
+                        </tr>
+                        <tr>
+                            <td />
+                            <td><input type="button" id="bases-bit-button"
+                                onclick="bases.showBitDlg()" /></td>
+                        </tr>
+                    </table>
+                    <input type="button" class="right-button" value="Close"
+                       onclick="bases.hideBases()" />
+                </form>
+            </div>
+        </div>
+    </div>
+    <div id="bases-bit-dialog" class="modal-background">
+        <div class="modal-wide-box">
+            <div class="modal-header">
+                ConvertAll - Bases - Bit Settings
+                <div class="close-button" onclick="bases.hideBitDlg()">X</div>
+            </div>
+            <div class="modal-content">
+                <form id="bases-bits" action="">
+                    <input type="number" id="num-bits" min="1" max="256" />
+                    bit overflow limit<br />
+                    <input type="checkbox" id="two-comp" />
+                    <label for="checkbox">Use two's complement for negative
+                        numbers</label><br />
+                    <input type="button" class="right-button" value="Submit"
+                       onclick="bases.updateBitSettings()" />
+                    <input type="button" class="right-button" value="Cancel"
+                       onclick="bases.hideBitDlg()" />
+                </form>
+            </div>
+        </div>
+    </div>
+    <div id="fractions-dialog" class="modal-background">
+        <div class="modal-widest-box">
+            <div class="modal-header">
+                ConvertAll - Fractions
+                <div class="close-button"
+                    onclick="fractions.hideFractions()">X</div>
+            </div>
+            <div class="modal-content">
+                <form id="fractions" action="">
+                    Expression: <input type="text" id="fract_expr" />
+                    <input type="button" value="Enter"
+                         onclick="fractions.calcFractions()" /><br />
+                    <table class="fraction-list">
+                        <thead>
+                            <tr>
+                                <th>Fraction</th>
+                                <th>Decimal</th>
+                            </tr>
+                        </thead>
+                        <tbody id="fraction-list-body">
+                        </tbody>
+                    </table>
+                    <input type="checkbox" id="fract_2_denom" />
+                    <label for="checkbox">Limit denominators to powers of
+                        two</label><br />
+                    <input type="button" class="right-button" value="Close"
+                       onclick="fractions.hideFractions()" />
                 </form>
             </div>
         </div>
@@ -145,7 +249,8 @@
                     ConvertAll, a versatile unit converter<br /><br />
                     Version <span id="version"></span><br />
                     by <span id="author"></span><br />
-                    <input type="button" value="OK" onclick="hideAbout()" />
+                    <input type="button" class="right-button" value="OK"
+                        onclick="hideAbout()" />
                 </form>
             </div>
         </div>
@@ -168,7 +273,8 @@
                     </ul><br />
                     <input type="checkbox" id="show-tip-box" checked />
                     <label for="show-tip-box">Show this tip at startup</label>
-                    <input type="button" value="OK" onclick="hideTip()" />
+                    <input type="button" class="right-button" value="OK"
+                        onclick="hideTip()" />
                 </form>
             </div>
         </div>
