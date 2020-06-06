@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 <!-- ConvertAll, a versatile unit converter -->
-<!-- Copyright (C) 2017, Douglas W. Bell -->
+<!-- Copyright (C) 2020, Douglas W. Bell -->
 
 <!-- This program is free software: you can redistribute it and/or modify
      it under the terms of the GNU Affero General Public License, either
@@ -70,6 +70,7 @@ body {
   <li><a href="#combine">Combining Units</a></li>
   <li><a href="#nonlinear">Non-Linear Conversions</a></li>
   <li><a href="#shortcut">Shortcuts</a></li>
+  <li><a href="#numbering">Numbering System Conversions</a></li>
   <li><a href="#options">Options</a></li></ul></li>
 <li><a href="#revs">Revision History</a></li>
 <li><a href="#contact">Questions or Comments?</a></li>
@@ -82,8 +83,8 @@ body {
 <h2>a unit conversion program</h2>
 
 <p>Written by Doug Bell<br>
-Version 0.1.4<br>
-April 18, 2018</p>
+Version 0.2.0<br>
+June 6, 2020</p>
 </div>
 
 <h2><a name="background"></a>Background</h2>
@@ -260,6 +261,17 @@ boxes and the "From" and "To" number editors.</p>
 side.  Standard or scientific notation may be used, or an expression including
 the normal math operators (+, -, *, /, **) and parenthesis may be entered.</p>
 
+<h3><a name="numbering"></a>Numbering System Conversions</h3>
+
+<p>The "Bases" button brings up a dialog that can convert between
+various numbering system bases.  There are entry boxes for decimal,
+hexadecimal, octal and binary entries.  A number can be entered into any
+of the boxes and equivalents will be shown in the others.</p>
+
+<p>The "Fractions" button brings up a dialog that can list fractional
+equivalents for a decimal number.  Type the number and press enter.  The
+fractions are listed in order of increasing accuracy.</p>
+
 <h3><a name="options"></a>Options</h3>
 
 <p>The "Options" button allows for changing several default settings.  These
@@ -277,6 +289,39 @@ it to zero will disable the Recent Unit button.  Another option will
 automatically load the most recent previous units at startup.</p>
 
 <h2><a name="revs"></a>Revision History</h2>
+
+<h3>June 6, 2020 - Release 0.2.0</h3>
+
+<ul>
+
+  <li>Added a separate base conversion dialog to convert between different
+  base numbering systems.  It converts from/to decimal, hexadecimal, octal and
+  binary bases.</li>
+
+  <li>Added a separate fraction conversion dialog to convert from decimal to
+  fractional numbers.  It provides a list of fractions in order of increasing
+  accuracy.</li>
+
+  <li>Added the Beaufort wind speed unit.</li>
+
+  <li>R-value thermal resistance units were added.</li>
+
+  <li>The diopter/dioptre optical power unit was added.</li>
+
+  <li>Added the rydberg and hartree energy units.</li>
+
+  <li>Added the Planck constant as a unit.</li>
+
+  <li>Slightly adjusted the conversion value of the atomic mass unit (amu) and
+  added the dalton synonym.</li>
+
+  <li>Slightly adjusted the conversion value of the astronomical (au) and the
+  parsec units.</li>
+
+  <li>Clarified the labels for several power-of-10 data units (KB, MB,
+  etc.) to show as "SI standard" rather than "IEC standard".</li>
+
+</ul>
 
 <h3>April 18, 2018 - Release 0.1.4</h3>
 
